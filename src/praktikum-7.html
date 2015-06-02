@@ -1,0 +1,37 @@
+<style>
+  .folder{
+    background-color: #b94a48;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px;
+    color: #ffffff;
+    display: inline-block;
+    min-width: 100px;
+  }
+</style>
+
+<h1>praktikum-7</h1>
+<button (click) = "newMail()">Neue Mail</button>
+<div *ng-for="#folder of folders" (click) = "selectFolder(folder)" class="folder">
+
+  {{folder}}
+  <button (click) = "deleteFolder(folder)">Löschen</button>
+  <button (click) = "renameFolder(folder)">Umbennen</button>
+</div>
+
+<div [hidden]="folders.length > 0">Keine Ordner vorhanden </div>
+
+<h1>{{selectedFolder}}</h1>
+<p *ng-for="#mail of mails" (click) = "selectMail(mail)">
+  {{mail.subject}}
+  <button (click) = "deleteMail(mail)">Löschen</button>
+  <button (click) = "moveMail(mail)">Verschieben</button>
+</p>
+
+<div [hidden]="!selectedMail.subject">
+  Test
+  <h4 [hidden]="!selectedMail">Von: {{ selectedMail.sender }}</h4>
+  <h4 [hidden]="!selectedMail">Betreff: {{ selectedMail.subject }}</h4>
+  <p [hidden]="!selectedMail">Datum: {{ selectedMail.date }}</p>
+  <p [hidden]="!selectedMail">{{ selectedMail.text }}</p>
+</div>
